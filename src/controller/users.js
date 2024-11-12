@@ -89,6 +89,11 @@ export async function login(req, res) {
             expiresIn: '30d',
         });
 
+
+        res.cookie('token', token, {
+            httpOnly: true, // Helps secure the cookie by making it accessible only to the server
+            maxAge: 24 * 60 * 60 * 1000, // Cookie expires in 1 day
+          });
         res.json({ data: user, token });
     } catch (error) {
         res.status(500).send('Error: ' + error.message);
