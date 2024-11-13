@@ -41,8 +41,6 @@ export async function verify(req, res) {
     try {
 
         const { id } = req.user || {};
-        console.log();
-        console.log("hei");
         const user = await User.findById(id);
         if (!user) {
             return res.status(401).send('User not found');

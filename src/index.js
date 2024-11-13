@@ -29,7 +29,6 @@ app.use('/comments' , commentRouter)
 
 
 app.get('/' , function(req, res) {
-   console.log(req.cookie);
     res.send('Hello World!');
 })
 

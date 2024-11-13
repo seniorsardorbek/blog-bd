@@ -6,8 +6,11 @@ import { makeSlug } from "../utils/slug.js"
 
 export const createBlog = async (req, res, next) => {
     try {
+        console.log(req.files);
         const images = req.files.map(file => file.filename)
+        console.log(images);
 
+        console.log(req.body);
         const slug = makeSlug(req.body?.title)
 
         console.log(slug);
