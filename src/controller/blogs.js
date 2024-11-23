@@ -3,6 +3,7 @@ import Blogs from "../schemas/Blog.js"
 import Users from "../schemas/Users.js"
 import { deletImages } from "../utils/deleteImages.js"
 import { makeSlug } from "../utils/slug.js"
+import {hasRole}  from "../auth/hasRole.js"
 
 export const createBlog = async (req, res, next) => {
     try {
@@ -39,7 +40,7 @@ export const createBlog = async (req, res, next) => {
 export const getBlogs = async (req, res, next) => {
     try {
         const blogs = await Blogs.find()
-        res.status(201).send(blogs);
+        res.status(200).send(blogs);
     } catch (error) {
         res.status(500).send('Error: ' + error.message);
     }
@@ -63,6 +64,9 @@ export const getBlog = async (req, res, next) => {
 
 export const deleteBlog = async (req, res, next) => {
     try {
+
+         hasRole(req, res, ['admin'])
+        
         const blog = await Blogs.findByIdAndDelete(req.params.id)
         if (!blog) {
             return res.status(404).send('Error: Blog not found');
