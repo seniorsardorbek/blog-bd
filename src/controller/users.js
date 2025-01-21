@@ -16,7 +16,7 @@ export async function getAllUsers(req, res) {
 
         limit = +limit
         skip = +skip
-
+console.log('heyh');
         const total = await User.countDocuments(filter);
         const data = await User.find(filter).sort({ [by]: order }).limit(limit).skip(limit * skip)
 
