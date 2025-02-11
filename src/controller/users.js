@@ -54,6 +54,7 @@ export async function verify(req, res) {
 
 export async function register(req, res) {
     try {
+        console.log('sjjsj');
         req.body.password = await bcrypt.hash(req.body.password, 12);
         const user = new User(req.body);
         const userExist = await User.findOne({ phonenumber: req.body?.phonenumber });

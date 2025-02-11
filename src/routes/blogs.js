@@ -10,7 +10,7 @@ router.get('/', getBlogs)
 router.post('/', upload.array('images') , createBlog)
 
 
-router.delete('/:id' , deleteBlog)
+router.delete('/:id' , isLoggedIn , deleteBlog)
 
 
 

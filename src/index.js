@@ -11,12 +11,13 @@ const app = express();
 app.use(cookieParser());
 
 app.use(
-    cors({
-      origin: 'http://localhost:5173', // Replace with your React app's URL
-      credentials: true, // Allow credentials (cookies, authorization headers, etc.)
-    })
-  );
-
+  cors({
+      origin: 'http://localhost:5174', // Change this to your frontend URL
+      credentials: true, // Allows cookies and authorization headers
+      methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+      allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+  })
+);
   
 app.use(express.static('uploads'))
 app.use(express.json())
@@ -33,7 +34,7 @@ app.get('/' , function(req, res) {
 })
 
 db()
-app.listen(3000 , () => {
+app.listen(4000 , () => {
   
     console.log('Server is running on port 4000');
 })

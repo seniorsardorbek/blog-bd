@@ -32,6 +32,7 @@ export const createBlog = async (req, res, next) => {
 
         res.status(201).send(blog);
     } catch (error) {
+        console.log(error);
         res.status(500).send('Error: ' + error.message);
     }
 }
@@ -66,7 +67,7 @@ export const deleteBlog = async (req, res, next) => {
     try {
 
          hasRole(req, res, ['admin'])
-        
+
         const blog = await Blogs.findByIdAndDelete(req.params.id)
         if (!blog) {
             return res.status(404).send('Error: Blog not found');
@@ -74,8 +75,9 @@ export const deleteBlog = async (req, res, next) => {
 
         deletImages(blog.images)
 
-        res.status(200).send('Blog deleted');
+       return res.status(200).send('Blog deleted');
     } catch (error) {
+
         res.status(500).send('Error: ' + error.message);
     }
 }
